@@ -4,7 +4,6 @@ import (
 	"errors"
 )
 
-
-func Err (msg string) (error) {
+func Err(msg string) error {
 	return errors.New(msg)
 }
