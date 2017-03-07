@@ -14,6 +14,10 @@ func GetDateStr(t time.Time, f string) (d string) {
 	switch f {
 	case "day":
 		d = t.Format("2006-01-02")
+	case "month":
+		d = t.Format("2006-01")
+	case "year":
+		d = t.Format("2006")
 	case "min":
 		d = t.Format("2006-01-02-15-04")
 	case "hour":
@@ -34,6 +38,10 @@ func GetNowStr(f string) (d string) {
 	switch f {
 	case "day":
 		d = t.Format("2006-01-02")
+	case "month":
+		d = t.Format("2006-01")
+	case "year":
+		d = t.Format("2006")
 	case "min":
 		d = t.Format("2006-01-02-15-04")
 	case "hour":
