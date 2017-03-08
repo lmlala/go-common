@@ -12,19 +12,18 @@ package common
 import (
 	//"github.com/astaxie/beego/logs"
 	"os"
-	log "github.com/Sirupsen/logrus"
+	"github.com/Sirupsen/logrus"
 	"time"
-	"fmt"
 )
 
-var logger *log.Logger
-var loglevels = map[string]log.Level{
-		"info":	log.InfoLevel,
-		"debug": log.DebugLevel,
-		"warning": log.WarnLevel,
-		"error": log.ErrorLevel,
-		"panic": log.PanicLevel,
-		"fatal": log.FatalLevel,
+
+var loglevels = map[string]logrus.Level{
+		"info":	logrus.InfoLevel,
+		"debug": logrus.DebugLevel,
+		"warning": logrus.WarnLevel,
+		"error": logrus.ErrorLevel,
+		"panic": logrus.PanicLevel,
+		"fatal": logrus.FatalLevel,
 	}
 
 //func GetLogger_Beego() (logger *logs.BeeLogger){
@@ -45,12 +44,14 @@ var loglevels = map[string]log.Level{
 //
 //}
 
-func GETLOGGER(logfile, loglevel string) *log.Logger {
+
+func GETLOGGER(logfile, loglevel string) *logrus.Logger {
+	var logger *logrus.Logger
+
 	//log.WithFields(log.Fields{
 	//"animal": "walrus",
 	//"size":   10,
 	//}).Info("A group of walrus emerges from the ocean")
-	
 	_, err := os.Stat(logfile)
 	if err != nil {
 		// try to create this file if not exist
@@ -65,15 +66,17 @@ func GETLOGGER(logfile, loglevel string) *log.Logger {
 	}
 
 	if logger != nil{
+		fmt.Println("already has logger")
 		return logger
 	}
 
-	logger = log.New()
+	logger = logrus.New()
 	f, _ := os.OpenFile(logfile, os.O_WRONLY|os.O_APPEND|os.O_CREATE, 0666)
-	log.SetOutput(f)
-	//logger.Out = f
+	//defer f.Close()
+	//logrus.SetOutput(f)
+	logger.Out = f
 	logger.Level = loglevels[loglevel]
-	format := &log.TextFormatter{}
+	format := &logrus.TextFormatter{}
 	format.ForceColors = true
 	format.FullTimestamp = true
 	format.TimestampFormat = time.RFC822
