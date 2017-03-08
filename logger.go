@@ -14,6 +14,7 @@ import (
 	"os"
 	"github.com/Sirupsen/logrus"
 	"time"
+	"fmt"
 )
 
 
@@ -66,7 +67,6 @@ func GETLOGGER(logfile, loglevel string) *logrus.Logger {
 	}
 
 	if logger != nil{
-		fmt.Println("already has logger")
 		return logger
 	}
 

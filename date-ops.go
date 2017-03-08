@@ -21,14 +21,14 @@ func Now() (t TimeStr) {
 	return t
 }
 
-func ThisTime(this time.Time) (t *TimeStr){
+func ThisTime(this time.Time) (t TimeStr){
 	t.Stamp = this
 	t.Str = this.Format("2006-01-02")
 	return t
 }
 
-func ThisTimeStr(this string) (err error, t *TimeStr){
-	t.Str = this
+func ThisTimeStr(this string) (err error, t TimeStr){
+	t.Str = "123"
 	t.Stamp, err = time.Parse("2006-01-02 15:04:05", this)
 	return err, t
 }
