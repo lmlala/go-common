@@ -33,22 +33,26 @@ func ThisTimeStr(this string) (err error, t TimeStr){
 	return err, t
 }
 
-func (t *TimeStr) DateTime() (string){
+func (t TimeStr) DateTime() (string){
 	return t.Stamp.Format("2006-01-02 15:04:05") // must be "2006-01-02 15:04:05"
 }
 
-func (t *TimeStr) Month() (string){
+func (t TimeStr) Month() (string){
 	return t.Stamp.Format("2006-01")
 }
 
-func (t *TimeStr) Day() (string){
+func (t TimeStr) MonthlyTable() (string){
+	return t.Stamp.Format("2006_01")
+}
+
+func (t TimeStr) Day() (string){
 	return t.Stamp.Format("2006-01-02")
 }
 
-func (t *TimeStr) Hour() (string){
+func (t TimeStr) Hour() (string){
 	return t.Stamp.Format("2006-01-02-15")
 }
 
-func (t *TimeStr) Minute() (string){
+func (t TimeStr) Minute() (string){
 	return t.Stamp.Format("2006-01-02-15-04")
 }
