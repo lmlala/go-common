@@ -17,7 +17,7 @@ type TimeStr struct {
 func Now() (t TimeStr) {
 
 	t.Stamp = time.Now()
-	t.Str = t.Stamp.Format("2006-01-02")
+	t.Str = t.Stamp.Format("2006-01-02 15:04:05")
 	return t
 }
 
@@ -28,7 +28,7 @@ func ThisTime(this time.Time) (t TimeStr){
 }
 
 func ThisTimeStr(this string) (err error, t TimeStr){
-	t.Str = "123"
+	t.Str = this
 	t.Stamp, err = time.Parse("2006-01-02 15:04:05", this)
 	return err, t
 }
@@ -50,9 +50,9 @@ func (t TimeStr) Day() (string){
 }
 
 func (t TimeStr) Hour() (string){
-	return t.Stamp.Format("2006-01-02-15")
+	return t.Stamp.Format("2006-01-02 15")
 }
 
 func (t TimeStr) Minute() (string){
-	return t.Stamp.Format("2006-01-02-15-04")
+	return t.Stamp.Format("2006-01-02 15:04")
 }
