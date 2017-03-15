@@ -16,20 +16,20 @@ type TimeStr struct {
 
 func Now() (t TimeStr) {
 
-	t.Stamp = time.Now()
+	t.Stamp = time.Now().Local()
 	t.Str = t.Stamp.Format("2006-01-02 15:04:05")
 	return t
 }
 
 func ThisTime(this time.Time) (t TimeStr){
 	t.Stamp = this
-	t.Str = this.Format("2006-01-02")
+	t.Str = t.Stamp.Format("2006-01-02 15:04:05")
 	return t
 }
 
 func ThisTimeStr(this string) (err error, t TimeStr){
 	t.Str = this
-	t.Stamp, err = time.Parse("2006-01-02 15:04:05", this)
+	t.Stamp, err = time.ParseInLocation("2006-01-02 15:04:05", this, time.Local)
 	return err, t
 }
 
@@ -55,4 +55,9 @@ func (t TimeStr) Hour() (string){
 
 func (t TimeStr) Minute() (string){
 	return t.Stamp.Format("2006-01-02 15:04")
+}
+
+func (t TimeStr) NextSecond() (TimeStr){
+	n := t.Stamp.Add(time.Duration(time.Second * 1))
+	return ThisTime(n)
 }
