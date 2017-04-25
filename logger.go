@@ -79,7 +79,8 @@ func GETLOGGER(logfile, loglevel string) *logrus.Logger {
 	format := &logrus.TextFormatter{}
 	format.ForceColors = true
 	format.FullTimestamp = true
-	format.TimestampFormat = time.RFC822
+	// format.TimestampFormat = time.RFC822
+	format.TimestampFormat = time.RFC3339Nano
 	logger.Formatter = format
 	//defer f.Close()
 	return logger
